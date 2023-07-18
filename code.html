@@ -58,17 +58,94 @@
             <div class="row row-cols-1 row-cols-lg-2">
                 <div class="col-lg-8">
                     <pre class="line-numbers"><code class="language-javascript">
-                        //Call Hello World
-                        function helloWorld(){
-                         alert("Hello World");
-                        }
+                        //get string from the page
+//controller
+
+function getString() {
+
+    document.getElementById("alert").classList.add("visible");//Make alert invisible when getValue is called
+
+    let userString = document.getElementById("userString").value;
+
+    let returnObj = checkPalindrome(userString);
+
+    displayMessage(returnObj);
+
+}
+
+//check if its a palindrome
+//logic
+function checkPalindrome(palindrome) {
+    
+     //make all lower case letters
+     palindrome = palindrome.toLowerCase();
+
+    //first remove special characters 
+    let regex = /[^a-z0-9]/gi;
+    palindrome = palindrome.replace(regex,"");
+
+    let revString = [];
+
+    let returnObj = {};
+
+    for (let index = palindrome.length-1; index >= 0; index--) {
+
+        revString += palindrome[index];
+
+    }
+
+    if (revString == palindrome) {
+
+        returnObj.msg = "Well Done! You entered a palindrome!";
+    }else {
+            returnObj.msg = "Sorry, you did not enter a palindrome!";
+        }
+    
+        returnObj.reversed = revString;
+
+        return returnObj;
+    
+    }
+   
+
+//display
+//view
+function displayMessage(returnObj){
+
+    document.getElementById("alertHeader").innerHTML = returnObj.msg;
+    document.getElementById("msg").innerHTML = `Your phrase reversed is: ${returnObj.reversed}`;
+    document.getElementById("alert").classList.remove("invisible");
+
+}
+
                     </code>
                 </pre>
                 </div>
                 <div class="col-lg-4">
-                    <p>The code is sctructured in one function.</p>
-                    <h5>Hello World</h5>
-                    <p>Hello World is a function that displays an alert with a message of "Hello World". </p>
+                    <p>The code is sctructured in Three functions.</p>
+                    <h5>getString()</h5>
+                    <p>This function is the starting point for the program. It gets the user's
+                        input from a text field on a webpage. The function then calls checkPalindrome() to determine if
+                        the entered string is a palindrome and displayMessage() to show the result on the webpage. </p>
+                    <h5>checkPalindrome()</h5>
+                    <p>This function takes a string as input and checks whether it is a
+                        palindrome. It performs the following steps:<br><br>
+
+                    <ul>
+                        <li>Converts the input string to lowercase to handle case insensitivity.</li>
+                        <li>Removes any special characters and spaces from the string using a regular expression.</li>
+                        <li>Creates a reversed version of the cleaned string.</li>
+                        <li>Compares the reversed string with the original to determine if it's a palindrome.</li>
+                        <li> Constructs and returns an object (returnObj) containing a message indicating if the input
+                            is a
+                            palindrome and the reversed version of the string.</li>
+                    </ul>
+
+                    <h5>displayMessage()</h5>
+                    <p>This function takes the returnObj as input and displays the result on
+                        the webpage. It modifies the content of certain HTML elements to show whether the input is a
+                        palindrome or not, along with the reversed version of the string.</p>
+
                 </div>
             </div>
         </div>
@@ -86,23 +163,25 @@
                 <div class="col-4 col-lg-2 d-flex align-items-center justify-content-start justify-content-lg-end pt-1">
                     <div class="row">
                         <div class="col-6 social">
-                            <a class="icon-link" href="https://www.linkedin.com/in/murilo-barbosa-55ab1492/" target="_blank"><i class="fab fa-linkedin fa-2x"></i>
+                            <a class="icon-link" href="https://www.linkedin.com/in/murilo-barbosa-55ab1492/"
+                                target="_blank"><i class="fab fa-linkedin fa-2x"></i>
                             </a>
                         </div>
                         <div class="col-6 social">
-                            <a class="icon-link" href="https://github.com/murilodab" target="_blank"><i class="fab fa-github fa-2x"></i>
+                            <a class="icon-link" href="https://github.com/murilodab" target="_blank"><i
+                                    class="fab fa-github fa-2x"></i>
                             </a>
-                        </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        </div>
     </footer>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="js/prism.js"></script>
     <script>
         Prism.plugins.NormalizeWhitespace.setDefaults({
